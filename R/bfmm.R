@@ -7,7 +7,8 @@
 #' and the predictor covariates (scalar)
 #' @param data, dataframe containing the data to be fit. Functional data
 #' should be in matrix format.
-#' @param alpha, alpha level (type 1 error rate) for pposterior inferences
+#' @param alpha, alpha level (type 1 error rate) for posterior inferences,
+#' if NULL, inference is not automatically performed
 #' @param id, column name containing subject-level identifiers (if available)
 #' @param K1, number of FPCs used at the first level, default chosen empirically
 #' to account for 95% variability
@@ -34,7 +35,11 @@
 #' @param treedepth, maximum tree depth for HMC sampler
 #' @param adapt_delta, adaptation target acceptance for HMC sampler
 #'
-#' @return BFM object containing posterior samples suitable for analysis
+#' @return named list of outputs:
+#' * Samples: posterior samples after applying alignment
+#' * Estimates: posterior estimates of all model parameters
+#' * Inferences: posterior credible intervals (if Alpha is supplied)
+#' * Diagnostics: list of model diagnostics (variance explained, RHats for MCMC)
 #'
 #' @references Sartini, J., Zhou, X., Selvin, L., Zeger, S., & Crainiceanu, C. (2025).
 #'   Fast Bayesian Functional Principal Components Analysis.
@@ -42,8 +47,8 @@
 #'
 #' @export
 #'
-bfmm <- function(form, data, alpha = 0.05, id = NULL, visit = NULL,
-                 K1 = NULL, K2 = NULL, spline_basis = "OB", spline_dim = 25,
+bfmm <- function(form, data, alpha = NULL, id = NULL, visit = NULL,
+                 K1 = NULL, K2 = NULL, spline_basis = "Vec", spline_dim = 25,
                  args = NULL, out_args = NULL, method = "MCMC", n_iter = 2000,
                  n_burnin = floor(n_iter/2), n_chains = 1, n_cores = 1,
                  treedepth = NULL, adapt_delta = NULL){
@@ -92,12 +97,14 @@ bfmm <- function(form, data, alpha = 0.05, id = NULL, visit = NULL,
   Samples = cmd_extract_permuted(model_fit)
   Formatted = extract_permuted(Samples, inputs_const$input_data, B_out, Type)
   Aligned = Align_Posterior(Formatted, inputs_const$input_data, B_out, Type)
+  Summary = list(Samples = Aligned)
 
   # Posterior Estimates and inference
-  Estimates = Posterior_Estimates(Aligned, B_out, inputs_const$input_data, Type)
-  Inferences = Posterior_Infer(Aligned, B_out, inputs_const$input_data, Type,
-                               Alpha = alpha)
-  Summary = model_output(Estimates, Inferences, Type, VarNames)
+  Summary$Estimates = Posterior_Estimates(Aligned, B_out, inputs_const$input_data, Type)
+  if(!is.null(Alpha)){
+    Summary$Inferences = Posterior_Infer(Aligned, B_out, inputs_const$input_data, Type,
+                                 Alpha = alpha)
+  }
   message("Outputs produced, running convergence diagnostics")
 
   # Model diagnostics
