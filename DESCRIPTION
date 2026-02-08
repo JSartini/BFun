@@ -1,7 +1,7 @@
 Package: BFun
 Type: Package
 Title: Bayesian Functional Models
-Version: 1.0.1
+Version: 0.1.0
 Author: Joseph Sartini
 Maintainer: Joseph Sartini <josephsartini@gmail.com>
 Description: Supporting functions to fit Bayesian Functional (Mixed) Models 
