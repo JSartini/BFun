@@ -38,7 +38,7 @@
 #' @return named list of outputs:
 #' * Samples: posterior samples after applying alignment
 #' * Estimates: posterior estimates of all model parameters
-#' * Inferences: posterior credible intervals (if Alpha is supplied)
+#' * Inferences: posterior credible intervals (if alpha is supplied)
 #' * Diagnostics: list of model diagnostics (variance explained, RHats for MCMC)
 #'
 #' @references Sartini, J., Zhou, X., Selvin, L., Zeger, S., & Crainiceanu, C. (2025).
@@ -101,7 +101,7 @@ bfmm <- function(form, data, alpha = NULL, id = NULL, visit = NULL,
 
   # Posterior Estimates and inference
   Summary$Estimates = Posterior_Estimates(Aligned, B_out, inputs_const$input_data, Type)
-  if(!is.null(Alpha)){
+  if(!is.null(alpha)){
     Summary$Inferences = Posterior_Infer(Aligned, B_out, inputs_const$input_data, Type,
                                  Alpha = alpha)
   }
