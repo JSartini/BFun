@@ -41,6 +41,12 @@
 #' * Inferences: posterior credible intervals (if alpha is supplied)
 #' * Diagnostics: list of model diagnostics (variance explained, RHats for MCMC)
 #'
+#' Outputs follow the same sub-object structure:
+#' * FE: Fixed effects (beta) matrix
+#' * EF(1/2): Eigenfunctions (FPCs) at levels 1 and 2
+#' * S(1/2): Eigenfunction scores at levels 1 and 2
+#' * EV(1/2): Eigenvalues at levels 1 and 2
+#'
 #' @references Sartini, J., Zhou, X., Selvin, L., Zeger, S., & Crainiceanu, C. (2025).
 #'   Fast Bayesian Functional Principal Components Analysis.
 #'   Journal of Computational and Graphical Statistics.
@@ -103,7 +109,7 @@ bfmm <- function(form, data, alpha = NULL, id = NULL, visit = NULL,
   Summary$Estimates = Posterior_Estimates(Aligned, B_out, inputs_const$input_data, Type)
   if(!is.null(alpha)){
     Summary$Inferences = Posterior_Infer(Aligned, B_out, inputs_const$input_data, Type,
-                                 Alpha = alpha)
+                                         Alpha = alpha)
   }
   message("Outputs produced, running convergence diagnostics")
 
