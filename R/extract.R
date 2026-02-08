@@ -45,11 +45,12 @@ extract_permuted <- function(Samples, Data, B_out, Type){
   n_samp = length(Samples$sigma2)
 
   # Fixed effects
-  if(length(dim(Samples$w_mu)) == 2){
-    dim(Samples$w_mu) = c(dim(Samples$w_mu), 1)
-  }
   wBeta = map(1:n_samp, function(x){
-    return(Samples$w_mu[x,,])
+    wB_s = Samples$w_mu[x,,]
+    if(is.null(dim(wB_s))){
+      dim(wB_s) = c(length(wB_s), 1)
+    }
+    return(wB_s)
   })
   Beta = map(wBeta, function(x){
     FE = B_out %*% x

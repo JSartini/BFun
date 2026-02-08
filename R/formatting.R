@@ -33,6 +33,9 @@ model_input <- function(form, data, id, visit, K1, K2, spline_basis,
   form_list = as.character(form)
   Y_mat = as.matrix(data[,form_list[2]])
   X_mat = model.matrix(formula(paste("~", form_list[3], collapse = " ")), data = data)
+  if(is.null(dim(X_mat))){
+    dim(X_mat) = c(length(X_mat), 1)
+  }
   x_names = colnames(X_mat)
 
   # Handle input/output arguments
@@ -74,8 +77,14 @@ model_input <- function(form, data, id, visit, K1, K2, spline_basis,
                       M = ncol(Y_mat), P = ncol(X_mat), Q = spline_dim, Y = Y_mat,
                       X = X_mat, B = spline_objs$Basis, P_alpha = spline_objs$Penalty)
 
-    FE_mod = fosr2s(Y_mat, X_mat, nbasis = spline_dim)
-    FE_Fitted = X_mat %*% t(FE_mod$est.func)
+    if(input_data$P == 1){
+      FE_mod = colMeans(Y_mat)
+      FE_Fitted = matrix(rep(FE_mod,each=input_data$N),nrow=input_data$N)
+    }
+    else{
+      FE_mod = fosr2s(Y_mat, X_mat, nbasis = spline_dim)
+      FE_Fitted = X_mat %*% t(FE_mod$est.func)
+    }
 
     if(is.null(visit)){
       model_file = "FAST_SL"
