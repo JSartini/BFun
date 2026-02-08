@@ -6,11 +6,11 @@ Author: Joseph Sartini
 Maintainer: Joseph Sartini <josephsartini@gmail.com>
 Description: Supporting functions to fit Bayesian Functional (Mixed) Models 
     using a stable Markov Chain Monte Carlo approach, post-process these results, 
-    and assess convergence of sampling. This package provides one of the few 
-    publicly available implementations of Functional PCA where the components
+    and assess convergence of sampling. This package provides a transparent,
+    publicly available implementation of Functional PCA where the components
     themselves are treated as stochastic. This ensures that all relevant sources 
     of uncertainty are accounted for when performing inference, a necessity in 
-    scenarios where the signal-to-noise ratio might be relatively small.
+    scenarios where the signal-to-noise ratio is small.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
