@@ -9,6 +9,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![License:
 GNU-3](https://img.shields.io/badge/license-GNU--3-blue.svg)](https://cran.r-project.org/web/licenses/GNU-3)
 [![](https://img.shields.io/github/last-commit/JSartini/BFun.svg)](https://github.com/JSartini/BFun/commits/main)
+[![](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg)](https://github.com/JSartini/BFun)
 <!-- badges: end -->
 
 The goal of BFun is to provide tools necessary to fit Bayesian

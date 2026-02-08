@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # BFun
 
 <!-- badges: start -->
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![License: GNU-3](https://img.shields.io/badge/license-GNU--3-blue.svg)](https://cran.r-project.org/web/licenses/GNU-3) [![](https://img.shields.io/github/last-commit/JSartini/BFun.svg)](https://github.com/JSartini/BFun/commits/main)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![License: GNU-3](https://img.shields.io/badge/license-GNU--3-blue.svg)](https://cran.r-project.org/web/licenses/GNU-3) [![](https://img.shields.io/github/last-commit/JSartini/BFun.svg)](https://github.com/JSartini/BFun/commits/main) [![](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg)](https://github.com/JSartini/BFun)
 <!-- badges: end -->
 
 The goal of BFun is to provide tools necessary to fit Bayesian Functional (Mixed) Models where random effects are represented using stochastic eigenfunctions. This type of joint modeling accounts for all potential sources of uncertainty, providing valid inferences even when signal to noise ratio is relatively small. The package is oriented around a Markov Chain Monte Carlo approach, but provides an experimental variational implementation as well (still undergoing testing).
