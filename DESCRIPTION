@@ -1,0 +1,46 @@
+Package: BFun
+Type: Package
+Title: Bayesian Functional Models
+Version: 1.0.1
+Author: Joseph Sartini
+Maintainer: Joseph Sartini <josephsartini@gmail.com>
+Description: Supporting functions to fit Bayesian Functional (Mixed) Models 
+    using a stable Markov Chain Monte Carlo approach, post-process these results, 
+    and assess convergence of sampling. This package provides one of the few 
+    publicly available implementations of Functional PCA where the components
+    themselves are treated as stochastic. This ensures that all relevant sources 
+    of uncertainty are accounted for when performing inference, a necessity in 
+    scenarios where the signal-to-noise ratio might be relatively small.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    magrittr,
+    methods,
+    orthogonalsplinebasis,
+    Rcpp (>= 0.12.0),
+    RcppParallel (>= 5.0.1),
+    Rdpack,
+    cmdstanr,
+    rstan (>= 2.18.1),
+    Splinets,
+    refund,
+    instantiate, 
+    stats
+RdMacros: Rdpack
+Suggests:
+  ggplot2,
+  testthat
+Biarch: true
+Depends: 
+    R (>= 3.4.0)
+LinkingTo: 
+    BH (>= 1.66.0),
+    Rcpp (>= 0.12.0),
+    RcppEigen (>= 0.3.3.3.0),
+    RcppParallel (>= 5.0.1),
+    rstan (>= 2.18.1),
+    StanHeaders (>= 2.18.0)
+SystemRequirements: GNU make
