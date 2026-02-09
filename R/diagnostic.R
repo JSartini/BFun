@@ -16,17 +16,17 @@ Var_Exp <- function(Estimates, Data, Type){
   output = list()
 
   FE_mod = X %*% t(Estimates$FE)
-  output$FE = 1 - var(c(FE_mod - Data$Y))/var_tot
+  output$FE = max(1 - var(c(FE_mod - Data$Y))/var_tot, 0)
 
   if(Type %in% c("Single-level", "Multilevel")){
     L1_dev = (Estimates$S1 %*% t(Estimates$EF1))[Data$ID, ]
     L1_mod = FE_mod + L1_dev
-    output$L1 = 1 - var(c(L1_mod - Data$Y))/var_tot
+    output$L1 = max(1 - var(c(L1_mod - Data$Y))/var_tot, 0)
 
     if(Type == "Multilevel"){
       L2_dev = Estimates$S2 %*% t(Estimates$EF2)
       L2_mod = L1_mod + L2_dev
-      output$L2 = 1 - var(c(L2_mod - Data$Y))/var_tot
+      output$L2 = max(1 - var(c(L2_mod - Data$Y))/var_tot, 0)
     }
   }
 
@@ -120,9 +120,6 @@ RHat_FPC_Score <- function(EF, Scores, EF_Estimate, Data, Level, Routine){
   Score_chains = map(Align_Objs, function(x){
     return(abind(x$Score, along = 3))
   }) %>% abind(along = 4)
-
-  print(dim(FPC_chains))
-  print(dim(Score_chains))
 
   # Calculate R-Hats
   FPC_rhats = matrix(0, nrow = Data$M, ncol = K)
