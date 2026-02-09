@@ -1,3 +1,17 @@
+#' @importFrom magrittr %>%
+#' @importFrom orthogonalsplinebasis SplineBasis OBasis evaluate OuterProdSecondDerivative
+#' @import dplyr
+#' @import purrr
+#' @import cmdstanr
+#' @import Splinets
+#' @import refund
+#' @import rstan
+#' @import instantiate
+#' @importFrom stats integrate
+#' @import abind
+#'
+NULL
+
 #' Fits a Bayesian Functional (Mixed) Model with scalar predictors
 #'
 #' @details Fits a flexible Bayesian functional mixed effects model using the
@@ -114,12 +128,12 @@ bfmm <- function(form, data, alpha = NULL, id = NULL, visit = NULL,
   message("Outputs produced, running convergence diagnostics")
 
   # Model diagnostics
-  Var_Exp = Var_Exp(Estimates, inputs_const$input_data, Type)
+  Var_Exp = Var_Exp(Summary$Estimates, inputs_const$input_data, Type)
   Diagnostics = list(Variance_Explained = Var_Exp)
   if(method == "MCMC"){
     chain_samples = cmd_extract_chains(model_fit)
     format_chains = extract_chain(chain_samples, inputs_const$input_data, B_out, Type)
-    converge = RHat_FullMod(format_chains, Estimates, inputs_const$input_data,
+    converge = RHat_FullMod(format_chains, Summary$Estimates, inputs_const$input_data,
                             VarNames, Type)
     Diagnostics$RHat = converge
   }
