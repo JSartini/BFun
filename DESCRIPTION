@@ -18,21 +18,25 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports:
     magrittr,
+    dplyr,
+    purrr,
     methods,
     orthogonalsplinebasis,
+    cmdstanr,
     Rcpp (>= 0.12.0),
     RcppParallel (>= 5.0.1),
     Rdpack,
-    cmdstanr,
     rstan (>= 2.18.1),
     Splinets,
     refund,
     instantiate, 
-    stats
+    stats, 
+    abind
 RdMacros: Rdpack
 Suggests:
   ggplot2,
-  testthat
+  testthat,
+  roxygen2
 Biarch: true
 Depends: 
     R (>= 3.4.0)
